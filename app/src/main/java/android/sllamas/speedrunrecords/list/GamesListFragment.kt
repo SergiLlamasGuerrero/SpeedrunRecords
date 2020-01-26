@@ -8,7 +8,9 @@ import android.sllamas.speedrunrecords.list.model.Game
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_games_list.*
 
 class GamesListFragment : Fragment(), GamesListPresenter.View {
@@ -35,6 +37,13 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
     }
 
     override fun initializeViews() {
+        val dividerDrawable = ContextCompat.getDrawable(context!!, R.drawable.recycler_view_divider)
+        gamesRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            ).apply { setDrawable(dividerDrawable!!) }
+        )
         gamesRecyclerView.adapter = gamesAdapter
 
         presenter.onViewsInitialized()
