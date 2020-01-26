@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class RecordsListFragment : Fragment(), RecordsListPresenter.View {
+class GamesListFragment : Fragment(), GamesListPresenter.View {
 
-    private val presenter by lazy { RecordsListPresenter() }
+    private val presenter by lazy { GamesListPresenter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = container?.inflate(R.layout.fragment_records_list)
+    ): View? = container?.inflate(R.layout.fragment_games_list)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
