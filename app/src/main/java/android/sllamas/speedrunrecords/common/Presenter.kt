@@ -6,7 +6,10 @@ abstract class Presenter<V : Presenter.View> {
 
     fun attachView(view: V) {
         this.view = view
+        onViewAttached()
     }
+
+    protected abstract fun onViewAttached()
 
     fun detachView() {
         view = null
