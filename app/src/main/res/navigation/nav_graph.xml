@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/recordsListFragment"
-        android:name="android.sllamas.speedrunrecords.list.GamesListFragment"
+        android:name="android.sllamas.speedrunrecords.ui.list.GamesListFragment"
         android:label="RecordsListFragment" />
 </navigation>

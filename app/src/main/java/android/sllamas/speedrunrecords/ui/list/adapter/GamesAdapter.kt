@@ -1,9 +1,9 @@
-package android.sllamas.speedrunrecords.list.adapter
+package android.sllamas.speedrunrecords.ui.list.adapter
 
+import android.sllamas.domain.Game
 import android.sllamas.speedrunrecords.R
-import android.sllamas.speedrunrecords.common.extensions.inflate
-import android.sllamas.speedrunrecords.common.extensions.load
-import android.sllamas.speedrunrecords.list.model.Game
+import android.sllamas.speedrunrecords.ui.common.extensions.inflate
+import android.sllamas.speedrunrecords.ui.common.extensions.load
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

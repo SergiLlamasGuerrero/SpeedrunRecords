@@ -1,21 +1,26 @@
-package android.sllamas.speedrunrecords.list
+package android.sllamas.speedrunrecords.ui.list
 
 import android.os.Bundle
+import android.sllamas.data.repository.GameRepository
+import android.sllamas.domain.Game
 import android.sllamas.speedrunrecords.R
-import android.sllamas.speedrunrecords.common.extensions.inflate
-import android.sllamas.speedrunrecords.list.adapter.GamesAdapter
-import android.sllamas.speedrunrecords.list.model.Game
+import android.sllamas.speedrunrecords.data.remote.games.GamesRemoteDataSourceImpl
+import android.sllamas.speedrunrecords.ui.common.extensions.inflate
+import android.sllamas.speedrunrecords.ui.list.adapter.GamesAdapter
+import android.sllamas.usecases.GetGames
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_games_list.*
 
 class GamesListFragment : Fragment(), GamesListPresenter.View {
 
-    private val presenter by lazy { GamesListPresenter() }
+    private val presenter by lazy { GamesListPresenter(GetGames(GameRepository(GamesRemoteDataSourceImpl()), Schedulers.io(), AndroidSchedulers.mainThread())) }
     private val gamesAdapter by lazy { GamesAdapter() }
 
     override fun onCreateView(

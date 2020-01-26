@@ -1,4 +1,4 @@
-package android.sllamas.speedrunrecords.common
+package android.sllamas.speedrunrecords.ui.common
 
 abstract class Presenter<V : Presenter.View> {
 

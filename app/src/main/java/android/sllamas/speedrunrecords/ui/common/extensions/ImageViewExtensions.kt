@@ -1,4 +1,4 @@
-package android.sllamas.speedrunrecords.common.extensions
+package android.sllamas.speedrunrecords.ui.common.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
