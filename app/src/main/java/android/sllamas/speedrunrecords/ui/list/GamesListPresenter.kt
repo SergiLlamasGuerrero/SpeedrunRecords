@@ -26,11 +26,16 @@ class GamesListPresenter(
         )
     }
 
+    fun onGameClicked() {
+        view?.showRunDetailScreen()
+    }
+
     interface View : Presenter.View {
         fun initializeViews()
         fun populateList(games: MutableList<Game>)
         fun showLoading()
         fun hideLoading()
         fun showError()
+        fun showRunDetailScreen()
     }
 }

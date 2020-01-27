@@ -14,6 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_games_list.*
 
 class GamesListFragment : Fragment(), GamesListPresenter.View {
 
+    private lateinit var navController: NavController
     private val presenter by lazy {
         GamesListPresenter(
             GetGames(
@@ -30,7 +33,7 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
             )
         )
     }
-    private val gamesAdapter by lazy { GamesAdapter() }
+    private val gamesAdapter by lazy { GamesAdapter(presenter::onGameClicked) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +42,7 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
     ): View? = container?.inflate(R.layout.fragment_games_list)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+        navController = view.findNavController()
         presenter.attachView(this)
     }
 
@@ -79,5 +81,9 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
 
     override fun populateList(games: MutableList<Game>) {
         gamesAdapter.items = games
+    }
+
+    override fun showRunDetailScreen() {
+        navController.navigate(R.id.action_recordsListFragment_to_runDetailFragment)
     }
 }

@@ -6,5 +6,17 @@
     <fragment
         android:id="@+id/recordsListFragment"
         android:name="android.sllamas.speedrunrecords.ui.list.GamesListFragment"
-        android:label="RecordsListFragment" />
+        android:label="RecordsListFragment" >
+        <action
+            android:id="@+id/action_recordsListFragment_to_runDetailFragment"
+            app:destination="@id/runDetailFragment"
+            app:enterAnim="@anim/translate_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/translate_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/runDetailFragment"
+        android:name="android.sllamas.speedrunrecords.ui.detail.RunDetailFragment"
+        android:label="RunDetailFragment" />
 </navigation>

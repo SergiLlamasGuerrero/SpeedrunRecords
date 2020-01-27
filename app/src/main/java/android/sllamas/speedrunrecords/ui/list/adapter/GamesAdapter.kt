@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_game.view.*
 
-class GamesAdapter : RecyclerView.Adapter<GamesAdapter.GameViewHolder>() {
+class GamesAdapter(val onGameClicked: () -> Unit) :
+    RecyclerView.Adapter<GamesAdapter.GameViewHolder>() {
 
     var items = mutableListOf<Game>()
         set(value) {
@@ -31,6 +32,7 @@ class GamesAdapter : RecyclerView.Adapter<GamesAdapter.GameViewHolder>() {
         fun bind(item: Game) = with(itemView) {
             logoImageView.load(item.logoUrl)
             gameTextView.text = item.name
+            setOnClickListener { onGameClicked() }
         }
     }
 }
