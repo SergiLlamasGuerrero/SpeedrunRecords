@@ -13,7 +13,7 @@ class GamesListPresenter(
     }
 
     fun onViewsInitialized() {
-        getGames.execute().subscribe(
+        getGames.execute().subscribeAndAddToDisposables (
             {
                 view?.populateList(it.toMutableList())
             },
