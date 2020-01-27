@@ -21,7 +21,15 @@ import kotlinx.android.synthetic.main.fragment_games_list.*
 
 class GamesListFragment : Fragment(), GamesListPresenter.View {
 
-    private val presenter by lazy { GamesListPresenter(GetGames(GameRepository(GamesRemoteDataSourceImpl()), Schedulers.io(), AndroidSchedulers.mainThread())) }
+    private val presenter by lazy {
+        GamesListPresenter(
+            GetGames(
+                GameRepository(
+                    GamesRemoteDataSourceImpl()
+                ), Schedulers.io(), AndroidSchedulers.mainThread()
+            )
+        )
+    }
     private val gamesAdapter by lazy { GamesAdapter() }
 
     override fun onCreateView(
@@ -53,6 +61,16 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
         gamesRecyclerView.adapter = gamesAdapter
 
         presenter.onViewsInitialized()
+    }
+
+    override fun showLoading() {
+        gamesRecyclerView.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        gamesRecyclerView.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
     }
 
     override fun showError() {

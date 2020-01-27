@@ -13,12 +13,15 @@ class GamesListPresenter(
     }
 
     fun onViewsInitialized() {
+        view?.showLoading()
         getGames.execute().subscribeAndAddToDisposables (
             {
                 view?.populateList(it.toMutableList())
+                view?.hideLoading()
             },
             {
                 view?.showError()
+                view?.hideLoading()
             }
         )
     }
@@ -26,6 +29,8 @@ class GamesListPresenter(
     interface View : Presenter.View {
         fun initializeViews()
         fun populateList(games: MutableList<Game>)
+        fun showLoading()
+        fun hideLoading()
         fun showError()
     }
 }

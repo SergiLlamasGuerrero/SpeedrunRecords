@@ -17,7 +17,7 @@ class GamesListPresenterTest {
 
     @Before
     fun setUp() {
-        getGamesUseCase = mockk()
+        getGamesUseCase = mockk(relaxed = true)
         view = mockk(relaxed = true)
         presenter = GamesListPresenter(getGamesUseCase)
     }
@@ -45,5 +45,31 @@ class GamesListPresenterTest {
         presenter.onViewsInitialized()
 
         verify { view.showError() }
+    }
+
+    @Test
+    fun `should show loading when views are initialized`() {
+        presenter.attachView(view)
+        presenter.onViewsInitialized()
+
+        verify { view.showLoading() }
+    }
+
+    @Test
+    fun `should hide loading when get games use case is successful`() {
+        every { getGamesUseCase.execute() } returns Single.just(mutableListOf())
+        presenter.attachView(view)
+        presenter.onViewsInitialized()
+
+        verify { view.hideLoading() }
+    }
+
+    @Test
+    fun `should hide loading when get games use case is not successful`() {
+        every { getGamesUseCase.execute() } returns Single.error(Throwable())
+        presenter.attachView(view)
+        presenter.onViewsInitialized()
+
+        verify { view.hideLoading() }
     }
 }
