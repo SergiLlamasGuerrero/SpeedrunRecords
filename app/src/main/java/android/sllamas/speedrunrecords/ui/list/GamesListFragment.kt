@@ -6,6 +6,7 @@ import android.sllamas.domain.Game
 import android.sllamas.speedrunrecords.R
 import android.sllamas.speedrunrecords.data.remote.games.GamesRemoteDataSourceImpl
 import android.sllamas.speedrunrecords.ui.common.extensions.inflate
+import android.sllamas.speedrunrecords.ui.common.extensions.showToast
 import android.sllamas.speedrunrecords.ui.list.adapter.GamesAdapter
 import android.sllamas.usecases.GetGames
 import android.view.LayoutInflater
@@ -52,6 +53,10 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
         gamesRecyclerView.adapter = gamesAdapter
 
         presenter.onViewsInitialized()
+    }
+
+    override fun showError() {
+        context!!.showToast(R.string.failed_to_load_games_list)
     }
 
     override fun populateList(games: MutableList<Game>) {

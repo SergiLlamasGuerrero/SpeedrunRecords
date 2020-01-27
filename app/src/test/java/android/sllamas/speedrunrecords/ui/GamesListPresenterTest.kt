@@ -37,4 +37,13 @@ class GamesListPresenterTest {
 
         verify { view.populateList(any()) }
     }
+
+    @Test
+    fun `should show error when get games use case is not successful`() {
+        every { getGamesUseCase.execute() } returns Single.error(Throwable())
+        presenter.attachView(view)
+        presenter.onViewsInitialized()
+
+        verify { view.showError() }
+    }
 }

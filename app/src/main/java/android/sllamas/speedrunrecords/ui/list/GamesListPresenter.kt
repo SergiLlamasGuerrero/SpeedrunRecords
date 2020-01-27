@@ -18,7 +18,7 @@ class GamesListPresenter(
                 view?.populateList(it.toMutableList())
             },
             {
-
+                view?.showError()
             }
         )
     }
@@ -26,5 +26,6 @@ class GamesListPresenter(
     interface View : Presenter.View {
         fun initializeViews()
         fun populateList(games: MutableList<Game>)
+        fun showError()
     }
 }
