@@ -1,18 +1,18 @@
 package android.sllamas.speedrunrecords.ui.list.adapter
 
-import android.sllamas.domain.Game
 import android.sllamas.speedrunrecords.R
 import android.sllamas.speedrunrecords.ui.common.extensions.inflate
 import android.sllamas.speedrunrecords.ui.common.extensions.load
+import android.sllamas.speedrunrecords.ui.list.model.GameViewEntity
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_game.view.*
 
-class GamesAdapter(val onGameClicked: () -> Unit) :
+class GamesAdapter(val onGameClicked: (GameViewEntity) -> Unit) :
     RecyclerView.Adapter<GamesAdapter.GameViewHolder>() {
 
-    var items = mutableListOf<Game>()
+    var items = mutableListOf<GameViewEntity>()
         set(value) {
             field.clear()
             field.addAll(value)
@@ -29,10 +29,10 @@ class GamesAdapter(val onGameClicked: () -> Unit) :
 
     inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: Game) = with(itemView) {
+        fun bind(item: GameViewEntity) = with(itemView) {
             logoImageView.load(item.logoUrl)
             gameTextView.text = item.name
-            setOnClickListener { onGameClicked() }
+            setOnClickListener { onGameClicked(item) }
         }
     }
 }

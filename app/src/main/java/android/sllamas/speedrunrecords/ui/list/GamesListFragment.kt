@@ -2,12 +2,12 @@ package android.sllamas.speedrunrecords.ui.list
 
 import android.os.Bundle
 import android.sllamas.data.repository.GameRepository
-import android.sllamas.domain.Game
 import android.sllamas.speedrunrecords.R
 import android.sllamas.speedrunrecords.data.remote.games.GamesRemoteDataSourceImpl
 import android.sllamas.speedrunrecords.ui.common.extensions.inflate
 import android.sllamas.speedrunrecords.ui.common.extensions.showToast
 import android.sllamas.speedrunrecords.ui.list.adapter.GamesAdapter
+import android.sllamas.speedrunrecords.ui.list.model.GameViewEntity
 import android.sllamas.usecases.GetGames
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +42,7 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
     ): View? = container?.inflate(R.layout.fragment_games_list)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         navController = view.findNavController()
         presenter.attachView(this)
     }
@@ -79,12 +80,12 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
         context!!.showToast(R.string.failed_to_load_games_list)
     }
 
-    override fun populateList(games: MutableList<Game>) {
+    override fun populateList(games: MutableList<GameViewEntity>) {
         gamesAdapter.items = games
     }
 
-    override fun showRunDetailScreen() {
-        val action = GamesListFragmentDirections.actionRecordsListFragmentToRunDetailFragment()
+    override fun showRunDetailScreen(game: GameViewEntity) {
+        val action = GamesListFragmentDirections.actionRecordsListFragmentToRunDetailFragment(game)
         navController.navigate(action)
     }
 }

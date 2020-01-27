@@ -18,5 +18,9 @@
     <fragment
         android:id="@+id/runDetailFragment"
         android:name="android.sllamas.speedrunrecords.ui.detail.RunDetailFragment"
-        android:label="RunDetailFragment" />
+        android:label="RunDetailFragment" >
+        <argument
+            android:name="game"
+            app:argType="android.sllamas.speedrunrecords.ui.list.model.GameViewEntity" />
+    </fragment>
 </navigation>

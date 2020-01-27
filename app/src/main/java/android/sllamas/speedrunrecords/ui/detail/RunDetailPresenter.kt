@@ -5,8 +5,10 @@ import android.sllamas.speedrunrecords.ui.common.Presenter
 class RunDetailPresenter : Presenter<RunDetailPresenter.View>() {
 
     override fun onViewAttached() {
-
+        view?.initializeViews()
     }
 
-    interface View : Presenter.View
+    interface View : Presenter.View {
+        fun initializeViews()
+    }
 }

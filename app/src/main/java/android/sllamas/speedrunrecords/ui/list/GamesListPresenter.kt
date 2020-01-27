@@ -1,7 +1,8 @@
 package android.sllamas.speedrunrecords.ui.list
 
-import android.sllamas.domain.Game
 import android.sllamas.speedrunrecords.ui.common.Presenter
+import android.sllamas.speedrunrecords.ui.list.model.GameViewEntity
+import android.sllamas.speedrunrecords.ui.list.model.transformToUi
 import android.sllamas.usecases.GetGames
 
 class GamesListPresenter(
@@ -16,7 +17,7 @@ class GamesListPresenter(
         view?.showLoading()
         getGames.execute().subscribeAndAddToDisposables (
             {
-                view?.populateList(it.toMutableList())
+                view?.populateList(it.map{ game -> game.transformToUi() }.toMutableList())
                 view?.hideLoading()
             },
             {
@@ -26,16 +27,16 @@ class GamesListPresenter(
         )
     }
 
-    fun onGameClicked() {
-        view?.showRunDetailScreen()
+    fun onGameClicked(game: GameViewEntity) {
+        view?.showRunDetailScreen(game)
     }
 
     interface View : Presenter.View {
         fun initializeViews()
-        fun populateList(games: MutableList<Game>)
+        fun populateList(games: MutableList<GameViewEntity>)
         fun showLoading()
         fun hideLoading()
         fun showError()
-        fun showRunDetailScreen()
+        fun showRunDetailScreen(game: GameViewEntity)
     }
 }
