@@ -84,6 +84,7 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
     }
 
     override fun showRunDetailScreen() {
-        navController.navigate(R.id.action_recordsListFragment_to_runDetailFragment)
+        val action = GamesListFragmentDirections.actionRecordsListFragmentToRunDetailFragment()
+        navController.navigate(action)
     }
 }
