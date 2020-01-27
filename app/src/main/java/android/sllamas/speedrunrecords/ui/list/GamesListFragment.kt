@@ -1,7 +1,7 @@
 package android.sllamas.speedrunrecords.ui.list
 
 import android.os.Bundle
-import android.sllamas.data.repository.GameRepository
+import android.sllamas.data.repository.GamesRepository
 import android.sllamas.speedrunrecords.R
 import android.sllamas.speedrunrecords.data.remote.games.GamesRemoteDataSourceImpl
 import android.sllamas.speedrunrecords.ui.common.extensions.inflate
@@ -27,7 +27,7 @@ class GamesListFragment : Fragment(), GamesListPresenter.View {
     private val presenter by lazy {
         GamesListPresenter(
             GetGames(
-                GameRepository(
+                GamesRepository(
                     GamesRemoteDataSourceImpl()
                 ), Schedulers.io(), AndroidSchedulers.mainThread()
             )
