@@ -2,4 +2,5 @@
     <string name="app_name">SpeedrunRecords</string>
 
     <string name="failed_to_load_games_list">Something went wrong loading games list</string>
+    <string name="watch_video_title">Watch run video:</string>
 </resources>
