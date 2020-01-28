@@ -6,9 +6,7 @@ import android.sllamas.speedrunrecords.data.remote.WebServiceProvider
 import android.sllamas.speedrunrecords.data.remote.games.GamesApi
 import io.reactivex.Single
 
-class RunsRemoteDataSourceImpl(
-    private val service: RunsApi = WebServiceProvider.getService(RunsApi::class.java)
-) : RunsRemoteDataSource {
+class RunsRemoteDataSourceImpl(private val service: RunsApi) : RunsRemoteDataSource {
 
     override fun getRuns(gameId: String): Single<List<Run>> =
         service.getRuns(gameId).map { wrapper -> wrapper.data.map { it.transformToDomain() } }

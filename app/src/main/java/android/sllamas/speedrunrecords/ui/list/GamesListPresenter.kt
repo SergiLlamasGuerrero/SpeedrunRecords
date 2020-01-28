@@ -15,9 +15,9 @@ class GamesListPresenter(
 
     fun onViewsInitialized() {
         view?.showLoading()
-        getGames.execute().subscribeAndAddToDisposables (
+        getGames.execute().subscribeAndAddToDisposables(
             {
-                view?.populateList(it.map{ game -> game.transformToUi() }.toMutableList())
+                view?.populateList(it.map { game -> game.transformToUi() }.toMutableList())
                 view?.hideLoading()
             },
             {

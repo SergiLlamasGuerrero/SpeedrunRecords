@@ -1,14 +1,11 @@
 package android.sllamas.speedrunrecords.ui.list
 
 import android.os.Bundle
-import android.sllamas.data.repository.GamesRepository
 import android.sllamas.speedrunrecords.R
-import android.sllamas.speedrunrecords.data.remote.games.GamesRemoteDataSourceImpl
 import android.sllamas.speedrunrecords.ui.common.extensions.inflate
 import android.sllamas.speedrunrecords.ui.common.extensions.showToast
 import android.sllamas.speedrunrecords.ui.list.adapter.GamesAdapter
 import android.sllamas.speedrunrecords.ui.list.model.GameViewEntity
-import android.sllamas.usecases.GetGames
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,22 +14,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_games_list.*
+import org.koin.android.ext.android.inject
 
 class GamesListFragment : Fragment(), GamesListPresenter.View {
 
     private lateinit var navController: NavController
-    private val presenter by lazy {
-        GamesListPresenter(
-            GetGames(
-                GamesRepository(
-                    GamesRemoteDataSourceImpl()
-                ), Schedulers.io(), AndroidSchedulers.mainThread()
-            )
-        )
-    }
+    private val presenter by inject<GamesListPresenter>()
     private val gamesAdapter by lazy { GamesAdapter(presenter::onGameClicked) }
 
     override fun onCreateView(
