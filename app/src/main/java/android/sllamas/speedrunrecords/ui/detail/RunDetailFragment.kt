@@ -10,6 +10,8 @@ import android.sllamas.usecases.GetRunsByGameId
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -44,5 +46,27 @@ class RunDetailFragment : Fragment(), RunDetailPresenter.View {
         gameNameTextView.text = args.game.name
         logoImageView.load(args.game.logoUrl)
         presenter.onReadyToGetRunInfo(args.game.id)
+    }
+
+    override fun showPlayerName(playerName: String) {
+        playerTextView.visibility = View.VISIBLE
+        playerTextView.text = buildSpannedString {
+            bold { append("${getString(R.string.player_title)} ") }
+            append(playerName)
+        }
+    }
+
+    override fun showRunTime(time: Long) {
+        runTimeTextView.visibility = View.VISIBLE
+        runTimeTextView.text = buildSpannedString {
+            bold { append("${getString(R.string.runtime_title)} ") }
+            append(time.toString())
+            append(" ${getString(R.string.seconds)}")
+        }
+    }
+
+    override fun showVideoButton(url: String) {
+        videoImageButton.visibility = View.VISIBLE
+        watchVideoTextView.visibility = View.VISIBLE
     }
 }

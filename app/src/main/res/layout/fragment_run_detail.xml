@@ -35,27 +35,35 @@
         android:id="@+id/runTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoImageView"
-        tools:text="Run record time: 800s" />
+        tools:text="Run record time: 800s"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/playerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/runTimeTextView"
-        tools:text="Player: Name" />
+        tools:text="Player: Name"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/watchVideoTextView"
@@ -66,10 +74,12 @@
         android:layout_marginEnd="8dp"
         android:text="@string/watch_video_title"
         android:textSize="12sp"
+        android:visibility="gone"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playerTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/playerTextView"
+        tools:visibility="visible" />
 
     <ImageButton
         android:id="@+id/videoImageButton"
@@ -77,8 +87,10 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
         android:src="@drawable/ic_play_arrow_white_24dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/watchVideoTextView" />
+        app:layout_constraintTop_toBottomOf="@id/watchVideoTextView"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
