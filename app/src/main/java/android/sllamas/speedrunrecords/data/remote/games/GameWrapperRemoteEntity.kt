@@ -8,6 +8,7 @@ data class GameWrapperRemoteEntity(
 )
 
 data class GameRemoteEntity(
+    val id: String,
     val names: NameRemoteEntity,
     val assets: AssetsRemoteEntity
 )
@@ -24,4 +25,4 @@ data class CoversRemoteEntity(
     val uri: String
 )
 
-fun GameRemoteEntity.transformToDomain() = Game(names.international, assets.coverSmall.uri)
+fun GameRemoteEntity.transformToDomain() = Game(id, names.international, assets.coverSmall.uri)

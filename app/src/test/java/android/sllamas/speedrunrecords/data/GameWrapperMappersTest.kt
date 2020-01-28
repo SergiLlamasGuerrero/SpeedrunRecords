@@ -10,14 +10,16 @@ class GameWrapperMappersTest {
         val remoteGamesEntity = getGameRemoteEntity()
         val domainGamesEntity = remoteGamesEntity.transformToDomain()
 
+        assert(remoteGamesEntity.id == domainGamesEntity.id)
         assert(remoteGamesEntity.names.international == domainGamesEntity.name)
         assert(remoteGamesEntity.assets.coverSmall.uri == domainGamesEntity.logoUrl)
     }
 
     private fun getGameRemoteEntity(
+        id: String = "id",
         names: NameRemoteEntity = getNameRemoteEntity(),
         assets: AssetsRemoteEntity = getAssetsRemoteEntity()
-    ) = GameRemoteEntity(names, assets)
+    ) = GameRemoteEntity(id, names, assets)
 
     private fun getNameRemoteEntity(internationalName: String = "Some name") =
         NameRemoteEntity(internationalName)
