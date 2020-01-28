@@ -17,7 +17,7 @@ abstract class Presenter<V : Presenter.View> {
     protected abstract fun onViewAttached()
 
     fun detachView() {
-        disposables.dispose()
+        disposables.clear()
         view = null
     }
 
