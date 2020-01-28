@@ -17,6 +17,8 @@ import androidx.navigation.fragment.navArgs
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_run_detail.*
+import android.content.Intent
+import android.net.Uri
 
 class RunDetailFragment : Fragment(), RunDetailPresenter.View {
 
@@ -66,7 +68,10 @@ class RunDetailFragment : Fragment(), RunDetailPresenter.View {
     }
 
     override fun showVideoButton(url: String) {
-        videoImageButton.visibility = View.VISIBLE
         watchVideoTextView.visibility = View.VISIBLE
+        videoImageButton.visibility = View.VISIBLE
+        videoImageButton.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        }
     }
 }
