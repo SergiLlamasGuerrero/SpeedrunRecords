@@ -31,8 +31,8 @@ fun Application.initDI() {
 }
 
 private val appModule = module {
-    single { WebServiceProvider.getService(GamesApi::class.java)}
-    single { WebServiceProvider.getService(RunsApi::class.java)}
+    single { WebServiceProvider.getService(GamesApi::class.java) }
+    single { WebServiceProvider.getService(RunsApi::class.java) }
     factory<GamesRemoteDataSource> { GamesRemoteDataSourceImpl(get()) }
     factory<RunsRemoteDataSource> { RunsRemoteDataSourceImpl(get()) }
     factory { GamesListPresenter(get()) }
