@@ -3,6 +3,7 @@ package android.sllamas.speedrunrecords.ui
 import android.sllamas.domain.Run
 import android.sllamas.speedrunrecords.ui.detail.RunDetailPresenter
 import android.sllamas.usecases.GetRunsByGameId
+import android.sllamas.usecases.GetUserNameById
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -12,15 +13,17 @@ import org.junit.Test
 
 class RunDetailPresenterTest {
 
-    lateinit var getRunsByGameId: GetRunsByGameId
-    lateinit var presenter: RunDetailPresenter
-    lateinit var view: RunDetailPresenter.View
+    private lateinit var getRunsByGameId: GetRunsByGameId
+    private lateinit var getUserNameById: GetUserNameById
+    private lateinit var presenter: RunDetailPresenter
+    private lateinit var view: RunDetailPresenter.View
 
     @Before
     fun setUp() {
         getRunsByGameId = mockk(relaxed = true)
+        getUserNameById = mockk(relaxed = true)
         view = mockk(relaxed = true)
-        presenter = RunDetailPresenter(getRunsByGameId)
+        presenter = RunDetailPresenter(getRunsByGameId, getUserNameById)
     }
 
     @Test
@@ -82,6 +85,17 @@ class RunDetailPresenterTest {
         presenter.onReadyToGetRunInfo("")
 
         verify(exactly = 0) { view.showVideoButton(any()) }
+    }
+
+    @Test
+    fun`should show player name if its null in first api call and playerId is not`() {
+        every { getRunsByGameId.execute(any()) } returns
+                Single.just(listOf(getRun(playerName = null, playerId = "")))
+        every { getUserNameById.execute("") } returns Single.just("player name")
+        presenter.attachView(view)
+        presenter.onReadyToGetRunInfo("")
+
+        verify { view.showPlayerName("player name") }
     }
 
     private fun getRun(
